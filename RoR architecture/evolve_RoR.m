@@ -4,13 +4,7 @@
 % Author: M. Dale
 % Date: 16/01/18
 
-addpath(genpath('\RoR-master\'))
-
-clearvars -except dataSet maxMinorUnits maxMajorUnits resType
-rng(10,'twister');
-
-%% Task/rum parameters
-numTests = 10;
+%addpath(genpath('\RoR-master\'))
 
 if strcmp(dataSet,'NonLinerMap&Memory')
     figure3 = figure;
@@ -22,16 +16,6 @@ end
 
 startTime = datestr(now, 'HH:MM:SS');
 
-%Evolutionary parameters
-popSize =15;           
-numEpoch = 1985;
-numMutate = 0.3; 
-deme = popSize-1;   
-recRate = 0.4; 
-rankedFitness = 0;
-startFull = 1;
-leakOn = 1;
-genPrint = 20;
 
 saveError = zeros(numTests,maxMajorUnits+2);
 %% RUn MicroGA
@@ -167,13 +151,13 @@ for tests = 1:numTests
             [esnMinor(loser,:), esnMajor(loser).connectWeights,esnMajor(loser).interResScaling, esnMajor(loser).nInternalUnits] = reorderESNMinor_ext(esnMinor(loser,:),esnMajor(loser));
             
             %mutate nodes
-%             if round(rand)
-%                 for p = randi([1 10])
-%                     if rand < numMutate
-%                         [esnMinor,esnMajor] = mutateLoser_nodes(esnMinor,esnMajor,loser,i,maxMinorUnits);
-%                     end
-%                 end
-%             end
+            if round(rand)
+                for p = randi([1 10])
+                    if rand < numMutate
+                        [esnMinor,esnMajor] = mutateLoser_nodes(esnMinor,esnMajor,loser,i,maxMinorUnits);
+                    end
+                end
+            end
             
             %mutate scales
             if rand < numMutate

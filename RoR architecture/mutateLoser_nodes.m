@@ -18,20 +18,20 @@ switch(mutateType)
         esnMinor(loser,pos).spectralRadius = 2*rand;
         esnMinor(loser,pos).inputScaling = 2*rand-1;
         esnMinor(loser,pos).leakRate = rand;
-        esnMinor(loser,pos).inputShift = 1;
+        esnMinor(loser,pos).inputShift = 2*rand-1;
         
         if ~isempty(esnMinor(loser,pos).nInternalUnits)
             if esnMinor(loser,pos).nInternalUnits+1 > maxMinorUnits
                 esnMinor(loser,pos).nInternalUnits = esnMinor(loser,pos).nInternalUnits-1;
             end            
-            esnMinor(loser,pos).nInternalUnits = randi([esnMinor(loser,pos).nInternalUnits-1 esnMinor(loser,pos).nInternalUnits+1]);%randi([2 maxMinorUnits]);
+            esnMinor(loser,pos).nInternalUnits = randi([esnMinor(loser,pos).nInternalUnits-1 esnMinor(loser,pos).nInternalUnits+1]);
         else
             esnMinor(loser,pos).nInternalUnits = maxMinorUnits;
         end
         %weights
-        esnMinor(loser,pos).inputWeights = (2.0 * rand(esnMinor(loser,pos).nInternalUnits, esnMajor(loser).nInputUnits+1)- 1.0);%*esn.inputScaling;
+        esnMinor(loser,pos).inputWeights = (2.0 * rand(esnMinor(loser,pos).nInternalUnits, esnMajor(loser).nInputUnits+1)- 1.0);
         %initialise new reservoir
-        esnMinor(loser,pos).connectivity = max([10/esnMinor(loser,pos).nInternalUnits rand]);
+        esnMinor(loser,pos).connectivity = 10/esnMinor(loser,pos).nInternalUnits;
         esnMinor(loser,pos).internalWeights_UnitSR = generate_internal_weights(esnMinor(loser,pos).nInternalUnits, ...
             esnMinor(loser,pos).connectivity);
         esnMinor(loser,pos).internalWeights = esnMinor(loser,pos).spectralRadius * esnMinor(loser,pos).internalWeights_UnitSR;

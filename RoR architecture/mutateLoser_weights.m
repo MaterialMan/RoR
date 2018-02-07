@@ -31,7 +31,7 @@ if ~isempty(esnMinor(loser,pos).nInternalUnits)
                 while(~equal)
                     pos1 = randi([1 A]);
                     pos2 = randi([1 B]);
-                    if pos1 ~= pos2
+                    if (pos1 ~= pos2) && (~isempty(esnMajor(loser).connectWeights{pos1,pos2}))
                         equal = 1;
                     end
                 end

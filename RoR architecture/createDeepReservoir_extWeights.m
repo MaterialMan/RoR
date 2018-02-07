@@ -6,7 +6,7 @@ end
 if nargin < 7
     mutateActiv = 0;
 end
-    
+
 %% Reservoir Parameters
 for res = 1:numRes
     % Assign neuron/model type (options: 'plain' and 'leaky', so far... 'feedback', 'multinetwork', 'LeakyBias')
@@ -36,7 +36,7 @@ for res = 1:numRes
         else
             esnMajor(res).reservoirActivationFunction = 'tanh';
             break
-        end     
+        end
     end
     
     
@@ -65,7 +65,7 @@ for res = 1:numRes
             esnMinor(res,i).connectivity);
         esnMinor(res,i).internalWeights = esnMinor(res,i).spectralRadius * esnMinor(res,i).internalWeights_UnitSR;
         esnMinor(res,i).outputWeights = zeros(esnMajor(res).nOutputUnits, esnMinor(res,i).nInternalUnits + esnMajor(res).nInputUnits);
-            
+        
     end
     
     %% connectivity to other reservoirs
@@ -77,16 +77,14 @@ for res = 1:numRes
                 internalWeights(internalWeights ~= 0)  - 0.5;
             val = (2*rand-1);%/10;
             esnMajor(res).interResScaling{i,j} = val;
-            esnMajor(res).interResScaling{j,i} = val;
             
             if i==j %new
                 esnMajor(res).connectWeights{i,j} = esnMinor(res,j).internalWeights;
                 esnMajor(res).interResScaling{i,j} = 1;
             else
                 esnMajor(res).connectWeights{i,j} = internalWeights*esnMajor(res).interResScaling{i,j};%*esnMinor(res,i).inputScaling;%*esnMinor(res,i).connectRho{j};%(2.0 * rand(esnMinor(res,i).nInternalUnits, esnMinor(res,j).nInternalUnits)- 1.0);
-                esnMajor(res).connectWeights{j,i} = internalWeights'*esnMajor(res).interResScaling{j,i};%*esnMinor(res,i).inputScaling;
             end
-        end        
+        end
     end
-
-end 
+    
+end
