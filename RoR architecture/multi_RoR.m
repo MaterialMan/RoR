@@ -11,4 +11,4 @@ dataSet = 'NARMA10'
 resType = 'RoR_IA';
 maxMinorUnits=63;
 maxMajorUnits=2;
-evolve_RoR
+evolve_RoR-
