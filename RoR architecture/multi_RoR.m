@@ -1,5 +1,5 @@
 % Make sure files are on the path
-addpath(genpath('\RoR-master\'))
+addpath(genpath('\RoR-master-Git\'))
 
 dataSet = 'Laser'
 resType = 'RoR';
